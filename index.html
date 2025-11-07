@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JDpiggy's Carpet Bombing</title>
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #68a1ec;
+    }
+    canvas {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      display: block;
+      background: #68a1ec;
+      outline: none;
+      border: none;
+      box-shadow: none;
+    }
+    /* Start-screen container stacks title + play button */
+    #startUI {
+      position: absolute;
+      left: 50%; top: 12%;
+      transform: translateX(-50%);
+      z-index: 95;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+      pointer-events: none; /* enable children to opt-in when visible */
+    }
+
+    /* Overlay (title) inside the start container - use the same monospace bold style as in-canvas "GAME OVER" */
+    #overlay {
+      pointer-events: none;
+      text-align: center;
+      font-family: monospace;
+      font-size: 4vw; /* match game over canvas size (relative) */
+      text-shadow: 0 3px 8px #1d2640;
+      color: #fff;
+      background: none;
+      border: none;
+    }
+
+    /* Play button sits inside the start container and can receive pointer events */
+    #playBtn {
+      pointer-events: auto;
+      font-family: monospace; /* keep same font */
+      font-size: 2.1rem;
+      background: #2959a4;
+      border-radius: 0; /* unround the button */
+      padding: 0.5em 1.3em;
+      box-shadow: 0 6px 24px #253b54;
+      transition: background 0.2s;
+      cursor: pointer;
+      color: #fff;
+      border: 1px solid #888; /* 1px grey border */
+    }
+    #playBtn:hover { background: #346fd4; }
+
+    /* Restart button matches play button exactly */
+    #restartBtn {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 70%;
+      z-index: 96;
+      font-family: monospace;
+      font-size: 2.1rem;
+      background: #2959a4;
+      border-radius: 0; /* match play button's square corners */
+      padding: 0.5em 1.3em;
+      box-shadow: 0 6px 24px #253b54;
+      transition: background 0.2s;
+      cursor: pointer;
+      color: #fff;
+      border: 1px solid #888; /* match play button's border */
+    }
+    #restartBtn:hover { background: #346fd4; }
+    @media (max-width: 800px) {
+      #overlay { font-size: 8vw; }
+      #startUI { top: 6%; gap: 0.6rem; }
+      #restartBtn { top: 82%; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="gameCanvas" tabindex="1"></canvas>
+  <div id="startUI" style="display:none">
+    <div id="overlay">
+      <div style="font-size:4vw;font-weight:bold;letter-spacing:2px;">
+        JDpiggy's<br>Carpet Bombing
+      </div>
+    </div>
+    <button id="playBtn">Play</button>
+  </div>
+  <button id="restartBtn" style="display:none">Restart</button>
+  <script src="game_fixed.js"></script>
+</body>
+</html>
